@@ -24,7 +24,7 @@ safe([Man,Wolf,Goat,Cabbage]) :-
     % Goat case : oneEq(e, e, w).
      oneEq(Man,Goat,Cabbage).
 
-solution([e,e,e,e],[]).
+solution([e,e,e,e], []).
 % 1TIME => config = [w, w, w, w], [Move1, Move2, Move3, Move4, Move5, Move6, Move7]
 solution(Config,[Move|Rest]) :-
     % config = [w, w, w, w] Move = Move1, NextConfig = ?
@@ -33,11 +33,12 @@ solution(Config,[Move|Rest]) :-
      safe(NextConfig),
      solution(NextConfig,Rest).
 
+
 begin() :-
+    member(Y, [1,2,3,4,5,6,7,8,9,10]),
     setof(
         X,
-        (length(X, 7),
+        (length(X, Y),
         solution([w, w, w, w], X)),
     X),
     write(X).
-   
